@@ -29,8 +29,8 @@
             <div class="col-md-3">
                 <h5>LIÊN HỆ</h5>
                 <ul class="list-unstyled">
-                    <li><i class="fas fa-phone"></i> 1900 0014</li>
-                    <li><i class="fas fa-envelope"></i> contact@ananas.com</li>
+                    <li><i class="fas fa-phone"></i> 0961108937</li>
+                    <li><i class="fas fa-envelope"></i> chienvn102@gmail.com</li>
                     <li><i class="fas fa-map-marker-alt"></i> Tìm cửa hàng</li>
                 </ul>
             </div>

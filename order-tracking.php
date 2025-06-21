@@ -323,8 +323,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <h5><i class="fas fa-info-circle"></i> Cần hỗ trợ?</h5>
                     <p class="mb-0">Nếu bạn cần hỗ trợ về đơn hàng, vui lòng liên hệ với chúng tôi:</p>
                     <ul class="mb-0 mt-2">
-                        <li>Hotline: 1900-xxxx</li>
-                        <li>Email: support@ananas.vn</li>
+                        <li>Hotline: 0961108937</li>
+                        <li>Email: chienvn102@gmail.com</li>
                         <li>Giờ làm việc: 8:00 - 22:00 (Thứ 2 - Chủ nhật)</li>
                     </ul>
                 </div>
