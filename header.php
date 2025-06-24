@@ -45,7 +45,7 @@
                             <i class="fas fa-user"></i> <?php echo $_SESSION['user_name']; ?>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="profile.php">Tài khoản</a></li>
+                            <li><a class="dropdown-item" href="profile.php">Tài khoản (Chức năng đang lỗi)</a></li>
                             <li><a class="dropdown-item" href="my-orders.php">Đơn hàng</a></li>
                             <?php if(isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin' && in_array($_SESSION['user_role'], [1,2])): ?>
                                 <li><a class="dropdown-item" href="admin.php"><i class="fas fa-cogs"></i> Quản trị</a></li>

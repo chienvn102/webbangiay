@@ -264,7 +264,7 @@ $brands = $pdo->query("SELECT * FROM nhasanxuat ORDER BY nsx_ten")->fetchAll();
                                 <div class="out-of-stock-badge">HẾT HÀNG</div>
                             <?php endif; ?>
                             <a href="product-detail.php?id=<?php echo $product['sp_ma']; ?>">
-                                <img src="<?php echo $product['sp_hinh'] ?: 'uploads/placeholder.png'; ?>" 
+                                <img src="uploads/<?php echo $product['sp_hinh'] ?: 'placeholder.png'; ?>"
                                      class="card-img-top product-image" alt="<?php echo htmlspecialchars($product['sp_ten']); ?>"
                                      onerror="this.onerror=null;this.src='uploads/placeholder.png';">
                             </a>
