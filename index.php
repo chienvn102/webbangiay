@@ -244,7 +244,7 @@ $discovers = $stmt->fetchAll();
                 <?php foreach($featured_products as $product): ?>
                 <div class="col-md-3 col-sm-6">
                     <div class="card product-card <?php echo ($product['sp_soluong'] <= 0) ? 'out-of-stock' : ''; ?>">
-                        <img src="<?php echo $product['hsp_1'] ?: $product['sp_hinh'] ?: 'images/default-product.jpg'; ?>" 
+                        <img src="uploads/<?php echo $product['hsp_1'] ?: $product['sp_hinh'] ?: 'placeholder.png'; ?>"
                              class="card-img-top product-image" alt="<?php echo $product['sp_ten']; ?>">
                         <div class="card-body text-center">
                             <h6 class="product-title"><?php echo $product['sp_ten']; ?></h6>

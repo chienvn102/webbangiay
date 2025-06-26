@@ -17,6 +17,19 @@ $stmt = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $user = $stmt->fetch();
 
+
+
+// Nếu là customer thì lấy thêm thông tin từ bảng khachhang
+$customer = null;
+if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'customer') {
+    // Lấy thông tin khách hàng dựa vào email (username là email)
+    $stmt = $pdo->prepare("SELECT * FROM khachhang WHERE kh_email = ? LIMIT 1");
+    $stmt->execute([$user['username']]);
+    $customer = $stmt->fetch();
+}
+
+
+
 // Xử lý cập nhật thông tin
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     if(isset($_POST['update_profile'])) {
@@ -239,8 +252,8 @@ if ($_SESSION['user_type'] === 'customer') {
                             <div class="profile-avatar">
                                 <i class="fas fa-user"></i>
                             </div>
-                            <h3><?php echo $user['username']; ?></h3>
-                            <p class="mb-0">Thành viên từ <?php echo date('d/m/Y', strtotime($user['created_at'] ?? 'now')); ?></p>
+                            <h3><?php echo htmlspecialchars($customer['kh_hoten'] ?? $user['name'] ?? $user['username'] ?? ''); ?></h3>
+                            <p class="mb-0">Thành viên từ N/A</p>
                         </div>
                         
                         <div class="profile-content">
@@ -251,14 +264,14 @@ if ($_SESSION['user_type'] === 'customer') {
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Tên đăng nhập</label>
                                             <input type="text" class="form-control" id="username" name="username" 
-                                                   value="<?php echo $user['username']; ?>" required>
+                                                   value="<?php echo htmlspecialchars($user['username'] ?? ''); ?>" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
                                             <input type="email" class="form-control" id="email" name="email" 
-                                                   value="<?php echo ($_SESSION['user_type'] === 'customer') ? ($user['kh_email'] ?? '') : ($user['username'] ?? ''); ?>" required>
+                                                   value="<?php echo htmlspecialchars($customer['kh_email'] ?? $user['username'] ?? ''); ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -268,14 +281,14 @@ if ($_SESSION['user_type'] === 'customer') {
                                         <div class="mb-3">
                                             <label for="phone" class="form-label">Số điện thoại</label>
                                             <input type="tel" class="form-control" id="phone" name="phone" 
-                                                   value="<?php echo $user['phone'] ?? ''; ?>">
+                                                   value="<?php echo htmlspecialchars($customer['kh_sdt'] ?? ''); ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="address" class="form-label">Địa chỉ</label>
                                             <input type="text" class="form-control" id="address" name="address" 
-                                                   value="<?php echo $user['address'] ?? ''; ?>">
+                                                   value="<?php echo htmlspecialchars($customer['kh_diachi'] ?? ''); ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -386,4 +399,4 @@ if ($_SESSION['user_type'] === 'customer') {
 
     <?php include 'footer.php'; ?>
 </body>
-</html> 
+</html>

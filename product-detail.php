@@ -346,6 +346,33 @@ $related_products = $stmt->fetchAll();
         <?php endif; ?>
     </div>
 
+    <!-- Add to Cart Success Modal -->
+    <div class="modal fade" id="addToCartSuccessModal" tabindex="-1" aria-labelledby="addToCartSuccessModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    <h4 class="modal-title mb-3" id="addToCartSuccessModalLabel">Thêm vào giỏ hàng thành công!</h4>
+                    <p class="text-muted mb-4">Sản phẩm đã được thêm vào giỏ hàng của bạn.</p>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-outline-dark btn-lg" id="continueShoppingBtn" onclick="continueShopping()">
+                            <i class="fas fa-shopping-bag me-2"></i>Tiếp tục mua sắm
+                        </button>
+                        <button type="button" class="btn btn-dark btn-lg" onclick="goToCart()">
+                            <i class="fas fa-shopping-cart me-2"></i>Giỏ hàng
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <?php include 'footer.php'; ?>
 
 <script>
@@ -393,11 +420,21 @@ $related_products = $stmt->fetchAll();
         .then(response => response.json())
         .then(data => {
             if(data.success) {
-                alert('Đã thêm sản phẩm vào giỏ hàng!');
+                // Lưu URL hiện tại để quay lại
+                const currentUrl = window.location.href;
+                
+                // Hiển thị modal thành công
+                const successModal = new bootstrap.Modal(document.getElementById('addToCartSuccessModal'));
+                successModal.show();
+                
+                // Cập nhật số lượng giỏ hàng
                 const cartCount = document.querySelector('.cart-count');
                 if (cartCount) {
                     cartCount.textContent = data.cart_count;
                 }
+                
+                // Lưu URL để nút "Tiếp tục mua sắm" có thể quay lại
+                document.getElementById('continueShoppingBtn').setAttribute('data-current-url', currentUrl);
             } else {
                 alert('Có lỗi xảy ra: ' + data.message);
             }
@@ -406,6 +443,22 @@ $related_products = $stmt->fetchAll();
             console.error('Error:', error);
             alert('Có lỗi xảy ra khi thêm vào giỏ hàng.');
         });
+    }
+    
+    function continueShopping() {
+        const currentUrl = document.getElementById('continueShoppingBtn').getAttribute('data-current-url');
+        if (currentUrl && currentUrl.includes('product-detail.php')) {
+            // Nếu đang ở trang chi tiết sản phẩm, quay lại trang sản phẩm
+            window.location.href = 'products.php';
+        } else {
+            // Nếu không, đóng modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addToCartSuccessModal'));
+            modal.hide();
+        }
+    }
+    
+    function goToCart() {
+        window.location.href = 'cart.php';
     }
     
     function addToWishlist(productId) {

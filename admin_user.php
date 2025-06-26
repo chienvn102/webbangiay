@@ -207,6 +207,133 @@ $roles = $pdo->query("SELECT * FROM roles ORDER BY role_name")->fetchAll();
     </div>
     
     <!-- Modals -->
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Thêm người dùng mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST">
+                    <div class="modal-body">
+                        <input type="hidden" name="action" value="add">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Họ và tên</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Tên đăng nhập</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="role_id" class="form-label">Vai trò</label>
+                            <select class="form-control" id="role_id" name="role_id" required>
+                                <?php foreach ($roles as $role): ?>
+                                    <option value="<?php echo $role['role_id']; ?>"><?php echo htmlspecialchars($role['role_name']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Thêm người dùng</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User Modals -->
+    <?php foreach ($users as $user): ?>
+    <div class="modal fade" id="editUserModal<?php echo $user['user_id']; ?>" tabindex="-1" aria-labelledby="editUserModalLabel<?php echo $user['user_id']; ?>" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel<?php echo $user['user_id']; ?>">Sửa người dùng #<?php echo $user['user_id']; ?></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST">
+                    <div class="modal-body">
+                        <input type="hidden" name="action" value="edit">
+                        <input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
+                        <div class="mb-3">
+                            <label for="edit_name_<?php echo $user['user_id']; ?>" class="form-label">Họ và tên</label>
+                            <input type="text" class="form-control" id="edit_name_<?php echo $user['user_id']; ?>" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_username_<?php echo $user['user_id']; ?>" class="form-label">Tên đăng nhập</label>
+                            <input type="text" class="form-control" id="edit_username_<?php echo $user['user_id']; ?>" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_password_<?php echo $user['user_id']; ?>" class="form-label">Mật khẩu mới (để trống nếu không thay đổi)</label>
+                            <input type="password" class="form-control" id="edit_password_<?php echo $user['user_id']; ?>" name="password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_role_id_<?php echo $user['user_id']; ?>" class="form-label">Vai trò</label>
+                            <select class="form-control" id="edit_role_id_<?php echo $user['user_id']; ?>" name="role_id" required>
+                                <?php foreach ($roles as $role): ?>
+                                    <option value="<?php echo $role['role_id']; ?>" <?php echo ($role['role_id'] == $user['role_id']) ? 'selected' : ''; ?>>
+                                        <?php echo htmlspecialchars($role['role_name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <?php endforeach; ?>
+
+    <!-- Delete User Modals -->
+    <?php foreach ($users as $user): ?>
+    <div class="modal fade" id="deleteUserModal<?php echo $user['user_id']; ?>" tabindex="-1" aria-labelledby="deleteUserModalLabel<?php echo $user['user_id']; ?>" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteUserModalLabel<?php echo $user['user_id']; ?>">Xác nhận xóa người dùng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST">
+                    <div class="modal-body">
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
+                        <p>Bạn có chắc chắn muốn xóa người dùng <strong><?php echo htmlspecialchars($user['name']); ?></strong> (<?php echo htmlspecialchars($user['username']); ?>)?</p>
+                        <p class="text-danger">Hành động này không thể hoàn tác!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-danger">Xóa người dùng</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <?php endforeach; ?>
+
+    <!-- Display Error/Success Messages -->
+    <?php if (isset($error)): ?>
+    <div class="alert alert-danger alert-dismissible fade show position-fixed" style="top: 20px; right: 20px; z-index: 9999;" role="alert">
+        <?php echo $error; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php endif; ?>
+    
+    <?php if (isset($success)): ?>
+    <div class="alert alert-success alert-dismissible fade show position-fixed" style="top: 20px; right: 20px; z-index: 9999;" role="alert">
+        <?php echo $success; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php endif; ?>
 
     <a href="#" id="back-to-top" class="btn btn-lg btn-primary" role="button"><i class="fas fa-arrow-up"></i></a>
 
@@ -229,5 +356,8 @@ $roles = $pdo->query("SELECT * FROM roles ORDER BY role_name")->fetchAll();
             });
         });
     </script>
+
+
+    
 </body>
 </html> 
