@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 21, 2025 lúc 06:51 PM
+-- Thời gian đã tạo: Th6 26, 2025 lúc 06:45 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -118,7 +118,8 @@ INSERT INTO `dondathang` (`dh_ma`, `dh_ngaylap`, `dh_noigiao`, `dh_trangthaithan
 (84, '2025-06-21', 'dxsadcasjhdhajs', 1, 2, 98),
 (85, '2025-06-21', 'An Dương', 5, 3, 99),
 (86, '2025-06-21', 'ádasdasd', 1, 3, 100),
-(87, '2025-06-21', '68/45 Triều Khúc', 4, 3, 84);
+(87, '2025-06-21', '68/45 Triều Khúc', 4, 3, 84),
+(88, '2025-06-24', '68/45 Triều Khúc', 5, 3, 84);
 
 -- --------------------------------------------------------
 
@@ -133,15 +134,6 @@ CREATE TABLE `hinhsanpham` (
   `hsp_3` varchar(255) NOT NULL,
   `sp_ma` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
---
--- Đang đổ dữ liệu cho bảng `hinhsanpham`
---
-
-INSERT INTO `hinhsanpham` (`hsp_ma`, `hsp_1`, `hsp_2`, `hsp_3`, `sp_ma`) VALUES
-(10, '../../uploads/Pro_AV00152_2.jpg', '../../uploads/Pro_AV00152_3.jpg', '../../uploads/Pro_AV00152_4.jpg', 1),
-(12, '../../uploads/Pro_AV00150_2.jpg', '../../uploads/Pro_AV00150_3.jpg', '../../uploads/Pro_AV00150_4.jpg', 3),
-(13, '../../uploads/pro_AV00142_2.jpg', '../../uploads/pro_AV00142_3.jpg', '../../uploads/pro_AV00142_4.jpg', 4);
 
 -- --------------------------------------------------------
 
@@ -268,7 +260,8 @@ CREATE TABLE `nhasanxuat` (
 --
 
 INSERT INTO `nhasanxuat` (`nsx_ma`, `nsx_ten`) VALUES
-(13, 'Ananas');
+(13, 'Ananas'),
+(14, 'Thuong Dinh');
 
 -- --------------------------------------------------------
 
@@ -314,13 +307,12 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`sp_ma`, `sp_ten`, `sp_gia`, `sp_ngaycapnhat`, `sp_soluong`, `lsp_ma`, `nsx_ma`, `sp_hinh`, `sp_mota`, `dc_ma`) VALUES
-(1, 'BASAS WORKADAY', 600000, '2024-06-13', 22, 59, 13, '../../uploads/1718681718Pro_AV00152_1.jpg', 'BASAS WORKADAY', 1),
-(3, 'BASAS WORKADAY - TOP THẤP - REAL TEAL', 580000, '2024-06-21', 0, 59, 13, '../../uploads/1718936142Pro_AV00150_1.jpg', 'BASAS WORKADAY', 1),
-(4, 'BASAS EVERGREEN - LOW TOP - EVERGREEN', 500000, '2025-06-21', 47, 59, 13, 'uploads/1750521165_1718770300demo2.jpeg', 'BASAS EVERGREEN ', 1),
-(6, 'Giày ', 500000, '2025-06-21', 0, 59, 13, 'uploads/1750516251_1720425664demo1.jpg', 'ananas', 1),
-(7, 'Dép', 400000, '2025-06-21', 100, 61, 13, 'uploads/1750521201_1720425837Pro_AV00180_1.jpeg', '', 2),
+(6, 'Giày ', 500000, '2025-06-24', 0, 59, 13, '1750760918_1717920021Pro_AV00204_1.jpeg', 'ananas', 1),
+(7, 'Dép', 400000, '2025-06-24', 100, 61, 13, '1750760888_1717914414demo1.jpg', '', 2),
 (8, 'abc', 600000, '2025-06-21', 100, 60, 13, '1750523799_demo2.jpeg', '', 2),
-(9, 'giày adidas', 800000, '2025-06-21', 100, 62, 13, '1750523836_1718886717Pro_AV00180_4.jpeg', '', 1);
+(9, 'giày adidas', 800000, '2025-06-21', 100, 62, 13, '1750523836_1718886717Pro_AV00180_4.jpeg', '', 1),
+(10, 'giày thuong dinh', 300000, '2025-06-24', 30, 59, 14, '1750760468_1718352867Pro_AV00207_1.jpg', '', 1),
+(11, 'giày thuong dinh nu', 400000, '2025-06-24', 23, 59, 13, '1750760777_1718353450Pro_AV00209_1.jpg', '', 2);
 
 -- --------------------------------------------------------
 
@@ -340,26 +332,12 @@ CREATE TABLE `sanpham_dondathang` (
 --
 
 INSERT INTO `sanpham_dondathang` (`sp_ma`, `dh_ma`, `sp_dh_soluong`, `sp_dh_dongia`) VALUES
-(1, 72, 2, 600000.00),
-(1, 73, 1, 600000.00),
-(1, 74, 10, 600000.00),
-(1, 75, 3, 600000.00),
-(4, 76, 2, 500000.00),
-(3, 76, 1, 580000.00),
-(1, 76, 1, 600000.00),
-(3, 77, 1, 580000.00),
-(1, 77, 2, 600000.00),
-(4, 77, 1, 500000.00),
-(1, 78, 9, 600000.00),
-(1, 79, 1, 600000.00),
-(1, 80, 1, 600000.00),
-(3, 80, 1, 580000.00),
 (6, 82, 1, 500000.00),
 (6, 83, 2, 500000.00),
 (6, 84, 3, 500000.00),
 (6, 85, 2, 500000.00),
-(3, 86, 2, 580000.00),
-(6, 87, 100, 500000.00);
+(6, 87, 100, 500000.00),
+(10, 88, 1, 300000.00);
 
 -- --------------------------------------------------------
 
@@ -537,7 +515,7 @@ ALTER TABLE `discover`
 -- AUTO_INCREMENT cho bảng `dondathang`
 --
 ALTER TABLE `dondathang`
-  MODIFY `dh_ma` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `dh_ma` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT cho bảng `hinhsanpham`
@@ -567,7 +545,7 @@ ALTER TABLE `loaisanpham`
 -- AUTO_INCREMENT cho bảng `nhasanxuat`
 --
 ALTER TABLE `nhasanxuat`
-  MODIFY `nsx_ma` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `nsx_ma` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
@@ -579,7 +557,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `sp_ma` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `sp_ma` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `trangthai`
