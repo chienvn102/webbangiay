@@ -278,9 +278,9 @@ $brands = $pdo->query("SELECT * FROM nhasanxuat ORDER BY nsx_ten")->fetchAll();
                                 <p class="product-price mb-3"><?php echo number_format($product['sp_gia'], 0, ',', '.'); ?> VNĐ</p>
                                 
                                 <?php if ($product['sp_soluong'] > 0): ?>
-                                <a href="add-to-cart.php?id=<?php echo $product['sp_ma']; ?>" class="btn btn-dark w-100 mt-auto">
+                                <button class="btn btn-dark w-100 mt-auto" onclick="addToCart(<?php echo $product['sp_ma']; ?>)">
                                     <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ
-                                </a>
+                                </button>
                                 <?php else: ?>
                                 <button class="btn btn-secondary w-100 mt-auto" disabled>
                                     <i class="fas fa-times-circle me-2"></i>Hết hàng
@@ -317,6 +317,33 @@ $brands = $pdo->query("SELECT * FROM nhasanxuat ORDER BY nsx_ten")->fetchAll();
                     </ul>
                 </nav>
                 <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add to Cart Success Modal -->
+    <div class="modal fade" id="addToCartSuccessModal" tabindex="-1" aria-labelledby="addToCartSuccessModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    <h4 class="modal-title mb-3" id="addToCartSuccessModalLabel">Thêm vào giỏ hàng thành công!</h4>
+                    <p class="text-muted mb-4">Sản phẩm đã được thêm vào giỏ hàng của bạn.</p>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-outline-dark btn-lg" onclick="continueShopping()">
+                            <i class="fas fa-shopping-bag me-2"></i>Tiếp tục mua sắm
+                        </button>
+                        <button type="button" class="btn btn-dark btn-lg" onclick="goToCart()">
+                            <i class="fas fa-shopping-cart me-2"></i>Giỏ hàng
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -367,8 +394,11 @@ $brands = $pdo->query("SELECT * FROM nhasanxuat ORDER BY nsx_ten")->fetchAll();
         .then(response => response.json())
         .then(data => {
             if(data.success) {
-                alert('Đã thêm sản phẩm vào giỏ hàng!');
-                // Update cart count in header, assuming header has an element with class .cart-count
+                // Hiển thị modal thành công
+                const successModal = new bootstrap.Modal(document.getElementById('addToCartSuccessModal'));
+                successModal.show();
+                
+                // Cập nhật số lượng giỏ hàng
                 const cartCount = document.querySelector('.cart-count');
                 if (cartCount) {
                     cartCount.textContent = data.cart_count;
@@ -381,6 +411,16 @@ $brands = $pdo->query("SELECT * FROM nhasanxuat ORDER BY nsx_ten")->fetchAll();
             console.error('Error adding to cart:', error);
             alert('Có lỗi kết nối, vui lòng thử lại.');
         });
+    }
+    
+    function continueShopping() {
+        // Đóng modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('addToCartSuccessModal'));
+        modal.hide();
+    }
+    
+    function goToCart() {
+        window.location.href = 'cart.php';
     }
     </script>
 </body>
