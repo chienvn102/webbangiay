@@ -1,6 +1,3 @@
-# Thư mục uploads chứa ảnh sản phẩm, banner, ...
-uploads/
-
-# File cấu hình kết nối database
 connect.php
-
+/uploads/
+#abc
