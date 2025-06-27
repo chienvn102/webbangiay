@@ -59,7 +59,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => false, 'message' => 'Product ID is required']);
         exit;
     }
-    
+    //
     // Kiểm tra tồn kho
     require_once 'connect.php';
     $stmt = $pdo->prepare("SELECT sp_soluong FROM sanpham WHERE sp_ma = ?");
