@@ -1,1 +1,9 @@
-tuilaquan123456
+CREATE USER 'quan'@'localhost' IDENTIFIED BY '12345';
+GRANT ALL PRIVILEGES ON quanlybangiay.* TO 'quan'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+-
+SELECT user, host FROM mysql.user;
+-
+ssh congquannoi12@192.168.240.130 -p 2222
+
