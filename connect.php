@@ -1,13 +1,10 @@
 <?php
 $host = 'localhost';
 $dbname = 'quanlybangiay';
-<<<<<<< chien
-$username = 'chienvn102';
-$password = 'chienvn102';
-=======
-$username = 'root';
-$password = '';
->>>>>>> main
+
+$username = 'huy';
+$password = '123456';
+
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
