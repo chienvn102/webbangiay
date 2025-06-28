@@ -6,4 +6,6 @@ EXIT;
 SELECT user, host FROM mysql.user;
 -
 ssh congquannoi12@192.168.240.130 -p 2222
+-
+sudo nano /etc/apache2/sites-available/webbangiay.local.conf
 
