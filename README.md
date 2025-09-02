@@ -1,7 +1,6 @@
 # Website Bán Giày - Ananas
 
-Dự án website bán giày được phát triển bằng PHP và MySQL.
-
+Dự án website bán giày được phát triển bằng PHP và MySQL sử dụng cho môn Quy trình và công cụ phát triển phần mềm, contributors chỉ thực hiện thao tác push, pull, commit,v.v. để tìm hiểu về Git
 ## Tính năng
 
 - **Frontend:**
