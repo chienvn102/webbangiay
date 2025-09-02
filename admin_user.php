@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connect.php';
+require_once __DIR__ . '/connect.php';
 
 // Kiểm tra đăng nhập admin
 if(!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'admin' || $_SESSION['user_role'] != 1) {

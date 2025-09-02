@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connect.php';
+require_once __DIR__ . '/connect.php';
 
 // Check if user is logged in and is an admin
 if (!isset($_SESSION['user_id']) || !in_array($_SESSION['user_role'], [1, 2])) {

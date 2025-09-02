@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connect.php';
+require_once __DIR__ . '/connect.php';
 
 // Lấy tất cả bài viết discover
 $stmt = $pdo->query("SELECT * FROM discover ORDER BY disc_id DESC");

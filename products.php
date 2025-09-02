@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connect.php';
+require_once __DIR__ . '/connect.php';
 
 // Xử lý bộ lọc
 $where_conditions = ["1=1"]; // Thay vì sp.sp_trangthai = 1

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connect.php';
+require_once __DIR__ . '/connect.php';
 
 // 1. Kiểm tra đăng nhập (Cho phép mọi user đã đăng nhập)
 if (!isset($_SESSION['user_id'])) {

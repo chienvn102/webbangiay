@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
     
     // Kiểm tra tồn kho
-    require_once 'connect.php';
+    require_once __DIR__ . '/connect.php';
     $stmt = $pdo->prepare("SELECT sp_soluong, sp_ten FROM sanpham WHERE sp_ma = ?");
     $stmt->execute([$product_id]);
     $product = $stmt->fetch();
@@ -61,7 +61,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     //
     // Kiểm tra tồn kho
-    require_once 'connect.php';
+    require_once __DIR__ . '/connect.php';
     $stmt = $pdo->prepare("SELECT sp_soluong FROM sanpham WHERE sp_ma = ?");
     $stmt->execute([$product_id]);
     $product = $stmt->fetch();

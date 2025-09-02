@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connect.php';
+require_once __DIR__ . '/connect.php';
 
 // Lấy banner
 $stmt = $pdo->query("SELECT * FROM banner ORDER BY banner_id DESC LIMIT 3");

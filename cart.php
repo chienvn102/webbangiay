@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connect.php';
+require_once __DIR__ . '/connect.php';
 
 // Khởi tạo giỏ hàng nếu chưa có
 if(!isset($_SESSION['cart'])) {
